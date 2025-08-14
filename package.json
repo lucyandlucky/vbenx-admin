@@ -3,23 +3,44 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "engines": {
-    "node": "^20.19.0 || >=22.12.0"
-  },
   "scripts": {
+    "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo build",
+    "build:analyze": "turbo build:analyze",
+    "build:antd": "pnpm run build --filter=@vben/web-antd",
+    "build:docker": "./scripts/deploy/build-local-docker-image.sh",
+    "build:docs": "pnpm run build --filter=@vben/docs",
+    "build:ele": "pnpm run build --filter=@vben/web-ele",
+    "build:naive": "pnpm run build --filter=@vben/web-naive",
+    "build:play": "pnpm run build --filter=@vben/playground",
+    "changeset": "pnpm exec changeset",
+    "check": "pnpm run check:circular && pnpm run check:dep && pnpm run check:type && pnpm check:cspell",
+    "check:circular": "vsh check-circular",
+    "check:cspell": "cspell lint **/*.ts **/README.md .changeset/*.md --no-progress",
+    "check:dep": "vsh check-dep",
+    "check:type": "turbo run typecheck",
+    "clean": "node ./scripts/clean.mjs",
+    "commit": "czg",
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --build",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "format": "vsh lint --format",
+    "lint": "vsh lint",
+    "postinstall": "pnpm -r run stub --if-present",
+    "preinstall": "npx only-allow pnpm",
+    "preview": "turbo-run preview",
+    "publint": "vsh publint",
+    "reinstall": "pnpm clean --del-lock && pnpm install",
+    "test:unit": "vitest run --dom",
+    "test:e2e": "turbo run test:e2e",
+    "update:deps": "npx taze -r -w",
+    "version": "pnpm exec changeset version && pnpm install --no-frozen-lockfile",
+    "catalog": "pnpx codemod pnpm/catalog"
   },
   "devDependencies": {
     "@changesets/changelog-github": "catalog:",
     "@changesets/cli": "catalog:",
     "@playwright/test": "catalog:",
     "@types/node": "catalog:",
+    "@vbenx/eslint-config": "workspace:*",
+    "@vbenx/prettier-config": "workspace:*",
     "@vbenx/tsconfig": "workspace:*",
     "@vitejs/plugin-vue": "catalog:",
     "@vitejs/plugin-vue-jsx": "catalog:",
@@ -41,6 +62,11 @@
     "vue": "catalog:",
     "vue-tsc": "catalog:"
   },
+  "engines": {
+    "node": ">=20.10.0",
+    "pnpm": ">=9.12.0"
+  },
+  "packageManager": "pnpm@10.12.4",
   "pnpm": {
     "peerDependencyRules": {
       "allowedVersions": {
