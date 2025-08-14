@@ -1,0 +1,33 @@
+{
+  "name": "@vbenx/web",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "scripts": {
+    "build": "pnpm vite build --mode production",
+    "build:analyze": "pnpm vite build --mode analyze",
+    "dev": "pnpm vite --mode development",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit --skipLibCheck"
+  },
+  "main": "index.js",
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "dependencies": {
+    "@tanstack/vue-query": "catalog:",
+    "@vueuse/core": "catalog:",
+    "ant-design-vue": "catalog:",
+    "dayjs": "catalog:",
+    "json-bigint": "catalog:",
+    "pinia": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "@types/json-bigint": "catalog:"
+  },
+  "packageManager": "pnpm@10.12.4"
+}

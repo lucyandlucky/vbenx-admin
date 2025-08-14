@@ -1,22 +1,23 @@
 import type { Linter } from 'eslint';
+
 import {
-  prettier,
-  vue,
-  typescript,
-  javascript,
   command,
   comments,
   disableds,
   ignores,
   importPluginConfig,
+  javascript,
   jsdoc,
   jsonc,
   node,
   perfectionist,
+  prettier,
   regexp,
   test,
   turbo,
+  typescript,
   unicorn,
+  vue,
 } from './configs';
 import { customConfig } from './custom-config';
 
