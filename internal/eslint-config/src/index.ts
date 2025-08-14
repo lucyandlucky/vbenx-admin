@@ -1,5 +1,24 @@
 import type { Linter } from 'eslint';
-import { prettier, vue, typescript, javascript } from './configs';
+import {
+  prettier,
+  vue,
+  typescript,
+  javascript,
+  command,
+  comments,
+  disableds,
+  ignores,
+  importPluginConfig,
+  jsdoc,
+  jsonc,
+  node,
+  perfectionist,
+  regexp,
+  test,
+  turbo,
+  unicorn,
+} from './configs';
+import { customConfig } from './custom-config';
 
 type FlatConfig = Linter.Config;
 
@@ -11,10 +30,24 @@ type FlatConfigPromise =
 
 async function defineConfig(config: FlatConfig[] = []) {
   const configs: FlatConfigPromise[] = [
-    prettier(),
     vue(),
-    typescript(),
     javascript(),
+    ignores(),
+    prettier(),
+    typescript(),
+    jsonc(),
+    disableds(),
+    importPluginConfig(),
+    node(),
+    perfectionist(),
+    comments(),
+    jsdoc(),
+    unicorn(),
+    test(),
+    regexp(),
+    command(),
+    turbo(),
+    ...customConfig,
     ...config,
   ];
 
