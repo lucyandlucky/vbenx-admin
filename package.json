@@ -42,6 +42,7 @@
     "@vbenx/eslint-config": "workspace:*",
     "@vbenx/prettier-config": "workspace:*",
     "@vbenx/tsconfig": "workspace:*",
+    "@vbenx/vite-config": "workspace:*",
     "@vitejs/plugin-vue": "catalog:",
     "@vitejs/plugin-vue-jsx": "catalog:",
     "@vue/test-utils": "catalog:",

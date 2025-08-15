@@ -57,7 +57,7 @@ export async function typescript(): Promise<Linter.Config[]> {
         '@typescript-eslint/no-non-null-assertion': 'error',
         '@typescript-eslint/no-unused-expressions': 'off',
         '@typescript-eslint/no-unused-vars': [
-          'error',
+          'warn',
           {
             argsIgnorePattern: '^_',
             varsIgnorePattern: '^_',
