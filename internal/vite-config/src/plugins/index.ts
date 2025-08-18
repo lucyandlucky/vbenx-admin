@@ -1,27 +1,27 @@
-import type { PluginOption } from 'vite';
+import type { PluginOption } from 'vite'
 
 import type {
   ApplicationPluginOptions,
   CommonPluginOptions,
   ConditionPlugin,
   LibraryPluginOptions,
-} from '../typing';
+} from '../typing'
 
-import viteVue from '@vitejs/plugin-vue';
-import viteVueJsx from '@vitejs/plugin-vue-jsx';
-import viteDtsPlugin from 'vite-plugin-dts';
-import { createHtmlPlugin as viteHtmlPlugin } from 'vite-plugin-html';
-import viteVueDevTools from 'vite-plugin-vue-devtools';
+import viteVue from '@vitejs/plugin-vue'
+import viteVueJsx from '@vitejs/plugin-vue-jsx'
+import viteDtsPlugin from 'vite-plugin-dts'
+import { createHtmlPlugin as viteHtmlPlugin } from 'vite-plugin-html'
+import viteVueDevTools from 'vite-plugin-vue-devtools'
 
 async function loadConditionPlugins(conditionPlugins: ConditionPlugin[]) {
-  const plugins: PluginOption[] = [];
+  const plugins: PluginOption[] = []
   for (const plugin of conditionPlugins) {
     if (plugin.condition) {
-      const realPlugins = await plugin.plugins();
-      plugins.push(...realPlugins);
+      const realPlugins = await plugin.plugins()
+      plugins.push(...realPlugins)
     }
   }
-  return plugins;
+  return plugins
 }
 
 /**
@@ -30,7 +30,7 @@ async function loadConditionPlugins(conditionPlugins: ConditionPlugin[]) {
 async function loadCommonPlugins(
   options: CommonPluginOptions,
 ): Promise<ConditionPlugin[]> {
-  const { devtools, injectMetadata, isBuild, visualizer } = options;
+  const { devtools, injectMetadata, isBuild, visualizer } = options
 
   return [
     {
@@ -48,14 +48,14 @@ async function loadCommonPlugins(
       condition: !isBuild && devtools,
       plugins: () => [viteVueDevTools()],
     },
-  ];
+  ]
 }
 
 async function loadApplicationPlugin(
   options: ApplicationPluginOptions,
 ): Promise<PluginOption[]> {
-  const isBuild = options.isBuild;
-  const env = options.env;
+  const isBuild = options.isBuild
+  const env = options.env
 
   const {
     archiver,
@@ -64,9 +64,9 @@ async function loadApplicationPlugin(
     compressType,
     html,
     ...commonOptions
-  } = options;
+  } = options
 
-  const commonPlugins = await loadCommonPlugins(commonOptions);
+  const commonPlugins = await loadCommonPlugins(commonOptions)
 
   return await loadConditionPlugins([
     ...commonPlugins,
@@ -74,22 +74,22 @@ async function loadApplicationPlugin(
       condition: html,
       plugins: () => [viteHtmlPlugin()],
     },
-  ]);
+  ])
 }
 
 async function loadLibraryPlugins(
   options: LibraryPluginOptions,
 ): Promise<PluginOption[]> {
-  const isBuild = options.isBuild;
-  const { dts, ...commonOptions } = options;
-  const commonPlugins = await loadCommonPlugins(commonOptions);
+  const isBuild = options.isBuild
+  const { dts, ...commonOptions } = options
+  const commonPlugins = await loadCommonPlugins(commonOptions)
   return await loadConditionPlugins([
     ...commonPlugins,
     {
       condition: isBuild && !!dts,
       plugins: () => [viteDtsPlugin({ logLevel: 'error' })],
     },
-  ]);
+  ])
 }
 
-export { loadApplicationPlugin, loadLibraryPlugins };
+export { loadApplicationPlugin, loadLibraryPlugins }

@@ -1,4 +1,4 @@
-import type { UserConfig } from 'vite';
+import type { UserConfig } from 'vite'
 
 async function getCommonConfig(): Promise<UserConfig> {
   return {
@@ -7,7 +7,7 @@ async function getCommonConfig(): Promise<UserConfig> {
       reportCompressedSize: false,
       sourcemap: false,
     },
-  };
+  }
 }
 
-export { getCommonConfig };
+export { getCommonConfig }

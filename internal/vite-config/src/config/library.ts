@@ -1,20 +1,20 @@
-import type { ConfigEnv, UserConfig } from 'vite';
+import type { ConfigEnv, UserConfig } from 'vite'
 
-import type { DefineLibraryOptions } from '../typing';
+import type { DefineLibraryOptions } from '../typing'
 
-import { readPackageJSON } from 'pkg-types';
-import { defineConfig, mergeConfig } from 'vite';
+import { readPackageJSON } from 'pkg-types'
+import { defineConfig, mergeConfig } from 'vite'
 
-import { loadLibraryPlugins } from '../plugins';
-import { getCommonConfig } from './common';
+import { loadLibraryPlugins } from '../plugins'
+import { getCommonConfig } from './common'
 
 function defineLibraryConfig(userConfigPromise?: DefineLibraryOptions) {
   return defineConfig(async (config: ConfigEnv) => {
-    const options = await userConfigPromise?.(config);
-    const { command, mode } = config;
-    const { library = {}, vite = {} } = options || {};
-    const root = process.cwd();
-    const isBuild = command === 'build';
+    const options = await userConfigPromise?.(config)
+    const { command, mode } = config
+    const { library = {}, vite = {} } = options || {}
+    const root = process.cwd()
+    const isBuild = command === 'build'
 
     const plugins = await loadLibraryPlugins({
       dts: false,
@@ -22,15 +22,15 @@ function defineLibraryConfig(userConfigPromise?: DefineLibraryOptions) {
       isBuild,
       mode,
       ...library,
-    });
+    })
 
     const { dependencies = {}, peerDependencies = {} } =
-      await readPackageJSON(root);
+      await readPackageJSON(root)
 
     const externalPackage = [
       ...Object.keys(dependencies),
       ...Object.keys(peerDependencies),
-    ];
+    ]
 
     const packageConfig: UserConfig = {
       build: {
@@ -43,18 +43,18 @@ function defineLibraryConfig(userConfigPromise?: DefineLibraryOptions) {
           external: (id) => {
             return externalPackage.some(
               (pkg) => id === pkg || id.startsWith(`${pkg}/`),
-            );
+            )
           },
         },
       },
       plugins,
-    };
+    }
 
-    const commonConfig = await getCommonConfig();
-    const mergedCommonConfig = mergeConfig(commonConfig, packageConfig);
+    const commonConfig = await getCommonConfig()
+    const mergedCommonConfig = mergeConfig(commonConfig, packageConfig)
 
-    return mergeConfig(mergedCommonConfig, vite);
-  });
+    return mergeConfig(mergedCommonConfig, vite)
+  })
 }
 
-export { defineLibraryConfig };
+export { defineLibraryConfig }

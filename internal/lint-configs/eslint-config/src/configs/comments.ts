@@ -1,12 +1,12 @@
-import type { Linter } from 'eslint';
+import type { Linter } from 'eslint'
 
-import { interopDefault } from '../util';
+import { interopDefault } from '../util'
 
 export async function comments(): Promise<Linter.Config[]> {
   const [pluginComments] = await Promise.all([
     // @ts-expect-error - no types
     interopDefault(import('eslint-plugin-eslint-comments')),
-  ] as const);
+  ] as const)
 
   return [
     {
@@ -20,5 +20,5 @@ export async function comments(): Promise<Linter.Config[]> {
         'eslint-comments/no-unused-enable': 'error',
       },
     },
-  ];
+  ]
 }

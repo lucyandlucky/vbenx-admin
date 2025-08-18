@@ -1,13 +1,13 @@
-import type { Linter } from 'eslint';
+import type { Linter } from 'eslint'
 
-import { interopDefault } from '../util';
+import { interopDefault } from '../util'
 
 export async function typescript(): Promise<Linter.Config[]> {
   const [pluginTs, parserTs] = await Promise.all([
     interopDefault(import('@typescript-eslint/eslint-plugin')),
     // @ts-expect-error missing types
     interopDefault(import('@typescript-eslint/parser')),
-  ] as const);
+  ] as const)
 
   return [
     {
@@ -68,5 +68,5 @@ export async function typescript(): Promise<Linter.Config[]> {
         'unused-imports/no-unused-vars': 'off',
       },
     },
-  ];
+  ]
 }

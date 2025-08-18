@@ -1,28 +1,28 @@
-import type { CSSOptions, UserConfig } from 'vite';
+import type { CSSOptions, UserConfig } from 'vite'
 
-import type { DefineApplicationOptions } from '../typing';
+import type { DefineApplicationOptions } from '../typing'
 
-import { defineConfig, loadEnv, mergeConfig } from 'vite';
+import { defineConfig, loadEnv, mergeConfig } from 'vite'
 
-import { loadApplicationPlugin } from '../plugins';
-import { loadAnConvertEnv } from '../utils/env';
-import { getCommonConfig } from './common';
+import { loadApplicationPlugin } from '../plugins'
+import { loadAnConvertEnv } from '../utils/env'
+import { getCommonConfig } from './common'
 
 function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
   return defineConfig(async (config) => {
-    const options = await userConfigPromise?.(config);
-    const { appTitle, base, port, ...envConfig } = await loadAnConvertEnv();
-    const { application = {}, vite = {} } = options || {};
-    const { command, mode } = config;
-    const root = process.cwd();
-    const isBuild = command === 'build';
-    const env = loadEnv(mode, root);
+    const options = await userConfigPromise?.(config)
+    const { appTitle, base, port, ...envConfig } = await loadAnConvertEnv()
+    const { application = {}, vite = {} } = options || {}
+    const { command, mode } = config
+    const root = process.cwd()
+    const isBuild = command === 'build'
+    const env = loadEnv(mode, root)
 
     const plugins = await loadApplicationPlugin({
       env,
       ...envConfig,
       ...application,
-    });
+    })
 
     const applicationConfig: UserConfig = {
       base,
@@ -54,19 +54,19 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
           ],
         },
       },
-    };
+    }
 
     const mergedCommonConfig = mergeConfig(
       await getCommonConfig(),
       applicationConfig,
-    );
+    )
 
-    return mergeConfig(mergedCommonConfig, vite);
-  });
+    return mergeConfig(mergedCommonConfig, vite)
+  })
 }
 
 function createCssOptions(injectGlobalScss = true): CSSOptions {
-  return injectGlobalScss ? {} : {};
+  return injectGlobalScss ? {} : {}
 }
 
-export { defineApplicationConfig };
+export { defineApplicationConfig }

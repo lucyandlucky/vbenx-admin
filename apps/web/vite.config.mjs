@@ -1,4 +1,4 @@
-import { defineConfig } from '@vbenx/vite-config';
+import { defineConfig } from '@vbenx/vite-config'
 
 export default defineConfig(async () => {
   return {
@@ -15,5 +15,5 @@ export default defineConfig(async () => {
         },
       },
     },
-  };
-});
+  }
+})

@@ -1,13 +1,13 @@
-import type { Linter } from 'eslint';
+import type { Linter } from 'eslint'
 
-import { interopDefault } from '../util';
+import { interopDefault } from '../util'
 
 export async function test(): Promise<Linter.Config[]> {
   const [pluginTest, pluginNoOnlyTests] = await Promise.all([
     interopDefault(import('eslint-plugin-vitest')),
     // @ts-expect-error - no types
     interopDefault(import('eslint-plugin-no-only-tests')),
-  ] as const);
+  ] as const)
 
   return [
     {
@@ -41,5 +41,5 @@ export async function test(): Promise<Linter.Config[]> {
         'test/prefer-lowercase-title': 'error',
       },
     },
-  ];
+  ]
 }

@@ -1,4 +1,4 @@
-import config from '.';
+import config from '.'
 
 export default {
   plugins: {
@@ -9,4 +9,4 @@ export default {
     'tailwindcss/nesting': {},
     tailwindcss: { config },
   },
-};
+}

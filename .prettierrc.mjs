@@ -1,1 +1,1 @@
-export { default } from '@vbenx/prettier-config';
+export { default } from '@vbenx/prettier-config'

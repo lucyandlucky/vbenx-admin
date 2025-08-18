@@ -1,6 +1,6 @@
-import type { Linter } from 'eslint';
+import type { Linter } from 'eslint'
 
-import * as pluginImport from 'eslint-plugin-import-x';
+import * as pluginImport from 'eslint-plugin-import-x'
 
 export async function importPluginConfig(): Promise<Linter.Config[]> {
   return [
@@ -21,5 +21,5 @@ export async function importPluginConfig(): Promise<Linter.Config[]> {
         'import/no-webpack-loader-syntax': 'error',
       },
     },
-  ];
+  ]
 }

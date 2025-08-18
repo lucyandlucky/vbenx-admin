@@ -1,3 +1,3 @@
-import { defineConfig } from '@vbenx/eslint-config';
+import { defineConfig } from '@vbenx/eslint-config'
 
-export default defineConfig();
+export default defineConfig()

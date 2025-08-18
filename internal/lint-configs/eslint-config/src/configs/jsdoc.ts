@@ -1,11 +1,11 @@
-import type { Linter } from 'eslint';
+import type { Linter } from 'eslint'
 
-import { interopDefault } from '../util';
+import { interopDefault } from '../util'
 
 export async function jsdoc(): Promise<Linter.Config[]> {
   const [pluginJsdoc] = await Promise.all([
     interopDefault(import('eslint-plugin-jsdoc')),
-  ] as const);
+  ] as const)
 
   return [
     {
@@ -30,5 +30,5 @@ export async function jsdoc(): Promise<Linter.Config[]> {
         'jsdoc/require-yields-check': 'warn',
       },
     },
-  ];
+  ]
 }

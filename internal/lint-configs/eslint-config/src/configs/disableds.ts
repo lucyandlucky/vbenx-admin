@@ -1,4 +1,4 @@
-import type { Linter } from 'eslint';
+import type { Linter } from 'eslint'
 
 export async function disableds(): Promise<Linter.Config[]> {
   return [
@@ -24,5 +24,5 @@ export async function disableds(): Promise<Linter.Config[]> {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
       },
     },
-  ];
+  ]
 }
