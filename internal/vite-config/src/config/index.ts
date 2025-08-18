@@ -16,7 +16,17 @@ function defineConfig(
     projectType = existsSync(htmlPath) ? 'application' : 'library';
   }
 
-  return defineApplicationConfig(userConfigPromise);
+  switch (projectType) {
+    case 'application': {
+      return defineApplicationConfig(userConfigPromise);
+    }
+    case 'library': {
+      return defineApplicationConfig(userConfigPromise);
+    }
+    default: {
+      return defineApplicationConfig(userConfigPromise);
+    }
+  }
 }
 
 export { defineConfig };
