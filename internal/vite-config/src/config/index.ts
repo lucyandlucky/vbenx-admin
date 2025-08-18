@@ -4,9 +4,10 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { defineApplicationConfig } from './application';
+import { defineLibraryConfig } from './library';
 
 function defineConfig(
-  userConfigPromise: DefineConfig,
+  userConfigPromise?: DefineConfig,
   type: ProjectType = 'auto',
 ) {
   let projectType = type;
@@ -21,7 +22,7 @@ function defineConfig(
       return defineApplicationConfig(userConfigPromise);
     }
     case 'library': {
-      return defineApplicationConfig(userConfigPromise);
+      return defineLibraryConfig(userConfigPromise);
     }
     default: {
       return defineApplicationConfig(userConfigPromise);

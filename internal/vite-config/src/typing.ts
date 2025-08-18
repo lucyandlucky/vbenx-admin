@@ -16,7 +16,7 @@ interface ArchiverPluginOptions {
 /**
  * 通用插件配置选项
  */
-interface CommonPluignOpitons {
+interface CommonPluginOptions {
   /**
    * @description 是否开启开发者工具
    * @default false
@@ -53,7 +53,7 @@ interface CommonPluignOpitons {
  * 应用插件配置选项
  * @description 用于配置应用构建时的插件选项
  */
-interface ApplicationPluginOptions extends CommonPluignOpitons {
+interface ApplicationPluginOptions extends CommonPluginOptions {
   /**
    * 是否开启压缩归档
    * @description 开启后会在打包目录生成 zip 文件
@@ -88,19 +88,40 @@ interface ApplicationPluginOptions extends CommonPluignOpitons {
   html?: boolean;
 }
 
+interface LibraryPluginOptions extends CommonPluginOptions {
+  /**
+   * 是否开启 DTS 输出
+   * @description 生成 typescript 类型声明文件
+   * @default true
+   */
+  dts?: boolean | PluginOption;
+}
+
 /**
  * 应用配置类型选项
  */
 type ApplicationOptions = ApplicationPluginOptions;
 
-type DefineApplicationOpitons = (options?: ConfigEnv) => Promise<{
+/**
+ * 库配置选项类型
+ */
+type LibraryOptions = LibraryPluginOptions;
+
+type DefineApplicationOptions = (options?: ConfigEnv) => Promise<{
   /** 应用插件配置 */
-  application: ApplicationOptions;
+  application?: ApplicationOptions;
   /** Vite 配置 */
   vite?: UserConfig;
 }>;
 
-type DefineConfig = DefineApplicationOpitons;
+type DefineLibraryOptions = (options?: ConfigEnv) => Promise<{
+  /** 库插件配置 */
+  library?: LibraryOptions;
+  /** Vite 配置 */
+  vite?: UserConfig;
+}>;
+
+type DefineConfig = DefineApplicationOptions | DefineLibraryOptions;
 type ProjectType = 'application' | 'auto' | 'library';
 
 /**
@@ -119,11 +140,14 @@ interface ConditionPlugin {
   plugins: () => PluginOption[] | PromiseLike<PluginOption[]>;
 }
 
-export {
+export type {
   ApplicationPluginOptions,
-  CommonPluignOpitons,
+  CommonPluginOptions,
   ConditionPlugin,
-  DefineApplicationOpitons,
+  DefineApplicationOptions,
   DefineConfig,
+  DefineLibraryOptions,
+  LibraryOptions,
+  LibraryPluginOptions,
   ProjectType,
 };

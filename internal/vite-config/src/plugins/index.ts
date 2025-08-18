@@ -2,12 +2,14 @@ import type { PluginOption } from 'vite';
 
 import type {
   ApplicationPluginOptions,
-  CommonPluignOpitons,
+  CommonPluginOptions,
   ConditionPlugin,
+  LibraryPluginOptions,
 } from '../typing';
 
 import viteVue from '@vitejs/plugin-vue';
 import viteVueJsx from '@vitejs/plugin-vue-jsx';
+import viteDtsPlugin from 'vite-plugin-dts';
 import { createHtmlPlugin as viteHtmlPlugin } from 'vite-plugin-html';
 import viteVueDevTools from 'vite-plugin-vue-devtools';
 
@@ -25,8 +27,8 @@ async function loadConditionPlugins(conditionPlugins: ConditionPlugin[]) {
 /**
  * 加载通用的 vite 插件
  */
-async function loadCommonPlugin(
-  options: CommonPluignOpitons,
+async function loadCommonPlugins(
+  options: CommonPluginOptions,
 ): Promise<ConditionPlugin[]> {
   const { devtools, injectMetadata, isBuild, visualizer } = options;
 
@@ -64,7 +66,7 @@ async function loadApplicationPlugin(
     ...commonOptions
   } = options;
 
-  const commonPlugins = await loadCommonPlugin(commonOptions);
+  const commonPlugins = await loadCommonPlugins(commonOptions);
 
   return await loadConditionPlugins([
     ...commonPlugins,
@@ -75,4 +77,19 @@ async function loadApplicationPlugin(
   ]);
 }
 
-export { loadApplicationPlugin };
+async function loadLibraryPlugins(
+  options: LibraryPluginOptions,
+): Promise<PluginOption[]> {
+  const isBuild = options.isBuild;
+  const { dts, ...commonOptions } = options;
+  const commonPlugins = await loadCommonPlugins(commonOptions);
+  return await loadConditionPlugins([
+    ...commonPlugins,
+    {
+      condition: isBuild && !!dts,
+      plugins: () => [viteDtsPlugin({ logLevel: 'error' })],
+    },
+  ]);
+}
+
+export { loadApplicationPlugin, loadLibraryPlugins };

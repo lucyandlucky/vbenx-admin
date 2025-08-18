@@ -1,6 +1,6 @@
 import type { CSSOptions, UserConfig } from 'vite';
 
-import type { DefineApplicationOpitons } from '../typing';
+import type { DefineApplicationOptions } from '../typing';
 
 import { defineConfig, loadEnv, mergeConfig } from 'vite';
 
@@ -8,7 +8,7 @@ import { loadApplicationPlugin } from '../plugins';
 import { loadAnConvertEnv } from '../utils/env';
 import { getCommonConfig } from './common';
 
-function defineApplicationConfig(userConfigPromise?: DefineApplicationOpitons) {
+function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
   return defineConfig(async (config) => {
     const options = await userConfigPromise?.(config);
     const { appTitle, base, port, ...envConfig } = await loadAnConvertEnv();

@@ -183,6 +183,9 @@ catalogs:
     nitropack:
       specifier: ^2.11.13
       version: 2.12.4
+    pkg-types:
+      specifier: ^2.2.0
+      version: 2.2.0
     playwright:
       specifier: ^1.53.2
       version: 1.54.2
@@ -584,6 +587,9 @@ importers:
       dotenv:
         specifier: 'catalog:'
         version: 16.6.1
+      pkg-types:
+        specifier: 'catalog:'
+        version: 2.2.0
       rollup:
         specifier: 'catalog:'
         version: 4.46.2
