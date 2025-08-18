@@ -41,6 +41,7 @@
     "@types/node": "catalog:",
     "@vbenx/eslint-config": "workspace:*",
     "@vbenx/prettier-config": "workspace:*",
+    "@vbenx/tailwind-config": "workspace:*",
     "@vbenx/tsconfig": "workspace:*",
     "@vbenx/vite-config": "workspace:*",
     "@vitejs/plugin-vue": "catalog:",
