@@ -1,0 +1,28 @@
+{
+  "name": "@vbenx/styles",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./antd": {
+      "default": "./src/antd/index.css"
+    },
+    "./global": {
+      "default": "./src/global/index.scss"
+    }
+  },
+  "dependencies": {
+    "@vbenx-core/design": "workspace:*"
+  },
+  "packageManager": "pnpm@10.12.4"
+}

@@ -373,6 +373,9 @@ importers:
       '@tanstack/vue-query':
         specifier: 'catalog:'
         version: 5.85.2(vue@3.5.18(typescript@5.8.3))
+      '@vbenx/styles':
+        specifier: 'workspace: *'
+        version: link:../../packages/styles
       '@vueuse/core':
         specifier: 'catalog:'
         version: 13.6.0(vue@3.5.18(typescript@5.8.3))
@@ -614,6 +617,14 @@ importers:
       vite-plugin-lazy-import:
         specifier: 'catalog:'
         version: 1.0.7
+
+  packages/@core/base/design: {}
+
+  packages/styles:
+    dependencies:
+      '@vbenx-core/design':
+        specifier: workspace:*
+        version: link:../@core/base/design
 
 packages:
 

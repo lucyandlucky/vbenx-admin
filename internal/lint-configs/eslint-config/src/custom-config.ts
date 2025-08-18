@@ -90,7 +90,7 @@ const customConfig: Linter.Config[] = [
     },
   },
   {
-    // @core/shared内部组件，不能引入@vbenx/* 或者 @vben-core/* 里面的包
+    // @core/shared内部组件，不能引入@vbenx/* 或者 @vbenx-core/* 里面的包
     files: ['packages/@core/base/**/**'],
     ignores: restrictedImportIgnores,
     rules: {
@@ -99,9 +99,9 @@ const customConfig: Linter.Config[] = [
         {
           patterns: [
             {
-              group: ['@vbenx/*', '@vben-core/*'],
+              group: ['@vbenx/*', '@vbenx-core/*'],
               message:
-                'The @vben-core/shared package cannot import the @vbenx package, please use the @core/shared package itself',
+                'The @vbenx-core/shared package cannot import th @vbenx package, please use the @core/shared package itself',
             },
           ],
         },

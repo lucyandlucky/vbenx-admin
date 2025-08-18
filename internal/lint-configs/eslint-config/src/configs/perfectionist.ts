@@ -4,7 +4,6 @@ import { interopDefault } from '../util'
 
 export async function perfectionist(): Promise<Linter.Config[]> {
   const perfectionistPlugin = await interopDefault(
-    // @ts-expect-error - no types
     import('eslint-plugin-perfectionist'),
   )
 
@@ -24,13 +23,13 @@ export async function perfectionist(): Promise<Linter.Config[]> {
           {
             customGroups: {
               type: {
-                'vben-core-type': ['^@vbenx-core/.+'],
-                'vben-type': ['^@vbenx/.+'],
+                'vbenx-core-type': ['^@vbenx-core/.+'],
+                'vbenx-type': ['^@vbenx/.+'],
                 'vue-type': ['^vue$', '^vue-.+', '^@vue/.+'],
               },
               value: {
-                vben: ['^@vbenx/.+'],
-                'vben-core': ['^@vbenx-core/.+'],
+                vbenx: ['^@vbenx/.+'],
+                'vbenx-core': ['^@vbenx-core/.+'],
                 vue: ['^vue$', '^vue-.+', '^@vue/.+'],
               },
             },
@@ -38,14 +37,14 @@ export async function perfectionist(): Promise<Linter.Config[]> {
             groups: [
               ['external-type', 'builtin-type', 'type'],
               'vue-type',
-              'vben-type',
-              'vben-core-type',
+              'vbenx-type',
+              'vbenx-core-type',
               ['parent-type', 'sibling-type', 'index-type'],
               ['internal-type'],
               'builtin',
               'vue',
-              'vben',
-              'vben-core',
+              'vbenx',
+              'vbenx-core',
               'external',
               'internal',
               ['parent', 'sibling', 'index'],
